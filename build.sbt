@@ -1,6 +1,6 @@
 ThisBuild / organization := "dapex"
 
-ThisBuild / version := "0.1.0-SNAPSHOT"
+ThisBuild / version := "1.0.0"
 
 lazy val commonSettings = Seq(
   scalaVersion := "2.13.10",
@@ -50,6 +50,7 @@ lazy val root = (project in file("."))
   )
   .settings(
     commonSettings,
+    name := "dapex-template",
     Compile / doc / sources := Seq.empty,
     scalacOptions ++= Scalac.options,
     Compile / mainClass := Some("dapex.MainApp"),

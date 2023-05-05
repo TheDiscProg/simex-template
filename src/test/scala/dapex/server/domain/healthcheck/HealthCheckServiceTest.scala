@@ -17,8 +17,8 @@ import scala.concurrent.ExecutionContext.global
 
 class HealthCheckServiceTest extends AnyFlatSpec with Matchers with MockitoSugar with ScalaFutures {
 
+  import cats.effect.unsafe.implicits.global
   private implicit def unsafeLogger = Slf4jLogger.getLogger[IO]
-  private implicit val contextShift = IO.contextShift(global)
 
   val healthy = new HealthChecker[IO]() {
     override val name: String = "healthy"

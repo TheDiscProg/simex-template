@@ -1,16 +1,12 @@
 package dapex
 
 import cats.data.NonEmptyList
-import cats.effect.{Bracket, ConcurrentEffect, ContextShift, Resource, Sync, Timer}
+import cats.effect.{Async, Resource, Sync}
 import cats.{Applicative, Monad, MonadError, Parallel}
+import com.comcast.ip4s._
 import dapex.config.ServerConfiguration
-import dapex.guardrail.healthcheck.{HealthcheckHandler, HealthcheckResource}
-import dapex.server.domain.healthcheck.{
-  HealthCheckService,
-  HealthChecker,
-  HealthcheckAPIHandler,
-  SelfHealthCheck
-}
+import dapex.guardrail.healthcheck.HealthcheckResource
+import dapex.server.domain.healthcheck.{HealthCheckService, HealthChecker, HealthcheckAPIHandler, SelfHealthCheck}
 import io.circe.config.parser
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.implicits._
@@ -22,9 +18,7 @@ object AppServer {
 
   def createServer[F[
       _
-  ]: Monad: ConcurrentEffect: Timer: Log4CatsLogger: ContextShift: Parallel: Applicative: Bracket[*[
-    _
-  ], Throwable]: Sync: MonadError[*[_], Throwable]](): Resource[F, Server] =
+  ]: Monad: Async: Log4CatsLogger: Parallel: Applicative: Sync: MonadError[*[_], Throwable]](): Resource[F, Server] =
     for {
       conf <- Resource.eval(parser.decodePathF[F, ServerConfiguration](path = "server"))
 
@@ -40,9 +34,11 @@ object AppServer {
       httpApp = Logger.httpApp(logHeaders = true, logBody = true)(allRoutes)
 
       // Build server
+      httpPort = Port.fromInt(conf.http.port.value)
+      httpHost = Ipv4Address.fromString(conf.http.host.value)
       server <- EmberServerBuilder.default
-        .withPort(conf.http.port.value)
-        .withHost(conf.http.host.value)
+        .withPort(httpPort.getOrElse(port"8000"))
+        .withHost(httpHost.getOrElse(ipv4"0.0.0.0"))
         .withHttpApp(httpApp)
         .build
     } yield server
