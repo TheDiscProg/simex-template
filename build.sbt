@@ -1,4 +1,4 @@
-ThisBuild / organization := "dapex"
+ThisBuild / organization := "Event Driven Architecture with DAPEX"
 
 ThisBuild / version := "1.1.0"
 
