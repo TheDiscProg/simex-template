@@ -1,12 +1,18 @@
 package dapex
 
 import cats.data.NonEmptyList
-import cats.effect.{Async, Resource, Sync}
-import cats.{Applicative, Monad, MonadError, Parallel}
+import cats.effect.{Async, Resource}
+import cats.{Monad, MonadError, Parallel}
 import com.comcast.ip4s._
 import dapex.config.ServerConfiguration
 import dapex.guardrail.healthcheck.HealthcheckResource
-import dapex.server.domain.healthcheck.{HealthCheckService, HealthChecker, HealthcheckAPIHandler, SelfHealthCheck}
+import dapex.server.domain.healthcheck.{
+  HealthCheckService,
+  HealthChecker,
+  HealthcheckAPIHandler,
+  SelfHealthCheck
+}
+import dapex.server.entities.AppService
 import io.circe.config.parser
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.implicits._
@@ -18,7 +24,8 @@ object AppServer {
 
   def createServer[F[
       _
-  ]: Monad: Async: Log4CatsLogger: Parallel: Applicative: Sync: MonadError[*[_], Throwable]](): Resource[F, Server] =
+  ]: Monad: Async: Log4CatsLogger: Parallel: MonadError[*[_], Throwable]]()
+      : Resource[F, AppService] =
     for {
       conf <- Resource.eval(parser.decodePathF[F, ServerConfiguration](path = "server"))
 
@@ -41,5 +48,5 @@ object AppServer {
         .withHost(httpHost.getOrElse(ipv4"0.0.0.0"))
         .withHttpApp(httpApp)
         .build
-    } yield server
+    } yield AppService(server)
 }
