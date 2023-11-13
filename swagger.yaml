@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  description: "DAPEX Scala Template for Service"
+  description: "SIMEX Scala Template"
   version: 1.0.0
-  title: DAPEX Template API
+  title: SIMEX Template API
 tags:
   - name: healthcheck
     description: Healthcheck API

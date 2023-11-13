@@ -1,4 +1,4 @@
-package dapex
+package simex
 
 import cats.effect._
 import org.typelevel.log4cats.Logger

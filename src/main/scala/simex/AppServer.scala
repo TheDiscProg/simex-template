@@ -1,24 +1,23 @@
-package dapex
+package simex
 
 import cats.data.NonEmptyList
 import cats.effect.{Async, Resource}
 import cats.{Monad, MonadError, Parallel}
 import com.comcast.ip4s._
-import dapex.config.ServerConfiguration
-import dapex.guardrail.healthcheck.HealthcheckResource
-import dapex.server.domain.healthcheck.{
+import io.circe.config.parser
+import org.http4s.ember.server.EmberServerBuilder
+import org.http4s.implicits._
+import org.http4s.server.middleware.Logger
+import org.typelevel.log4cats.{Logger => Log4CatsLogger}
+import shareprice.config.ServerConfiguration
+import simex.guardrail.healthcheck.HealthcheckResource
+import simex.server.domain.healthcheck.{
   HealthCheckService,
   HealthChecker,
   HealthcheckAPIHandler,
   SelfHealthCheck
 }
-import dapex.server.entities.AppService
-import io.circe.config.parser
-import org.http4s.ember.server.EmberServerBuilder
-import org.http4s.implicits._
-import org.http4s.server.Server
-import org.http4s.server.middleware.Logger
-import org.typelevel.log4cats.{Logger => Log4CatsLogger}
+import simex.server.entities.AppService
 
 object AppServer {
 

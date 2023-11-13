@@ -1,4 +1,4 @@
-# DAPEX Service Template
+# Simex Messaging API Service Template
 A template for creating new services. It:
 * Is written in Scala
 * Uses Guardrail to build the HTTP API
@@ -7,13 +7,13 @@ A template for creating new services. It:
 ## What's included
 There is a simple health check API that returns a status.  
 A basic health check is enabled but other health checks can be added (see below).  
-Please note that the health check API does not use DAPEX.
+Please note that the health check API does not use SIMEX.
 
 ## Extending the service for specific service
 Use the ***base*** section for entities (basic data carriers) and interfaces or traits.  
-The package ***dapex.entities*** is where any DAPEX request/response should live. As these are evolved 
+The package ***simex.entities*** is where any SIMEX request/response should live. As these are evolved 
 to a final solution, they can be moved into a separate repository.  
-The package name should follow the format ***dapex.\<application\>.domain.\<service\>**  
+The package name should follow the format ***simex.\<application\>.domain.\<service\>**  
 
 ### Package Naming: Application
 This should refer to the name of the service or application, for example, ***authenticator***.

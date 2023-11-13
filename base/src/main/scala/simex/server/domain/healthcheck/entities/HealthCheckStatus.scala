@@ -1,4 +1,4 @@
-package dapex.server.domain.healthcheck.entities
+package simex.server.domain.healthcheck.entities
 
 import cats.data.NonEmptyList
 

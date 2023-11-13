@@ -1,9 +1,10 @@
-package dapex.server.domain.healthcheck
+package simex.server.domain.healthcheck
 
 import cats.Id
-import dapex.server.domain.healthcheck.entities.{HealthCheckerResponse, HealthStatus}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
+import simex.server.domain.healthcheck.entities.HealthCheckerResponse
+import simex.server.domain.healthcheck.entities.HealthStatus.OK
 
 class SelfHealthCheckTest extends AnyFlatSpec {
 
@@ -12,7 +13,7 @@ class SelfHealthCheckTest extends AnyFlatSpec {
   it should "return OK health status" in {
     val status: Id[HealthCheckerResponse] = sut.checkHealth()
 
-    status.status shouldBe HealthStatus.OK
+    status.status shouldBe OK
   }
 
 }

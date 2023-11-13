@@ -1,18 +1,19 @@
-package dapex.server.domain.healthcheck
+package simex.server.domain.healthcheck
 
 import cats.Id
 import cats.data.NonEmptyList
-import dapex.guardrail.definitions.HealthResponse
-import dapex.guardrail.healthcheck.HealthcheckResource.HealthcheckResponse
-import dapex.server.domain.healthcheck.entities.{
-  HealthCheckStatus,
-  HealthCheckerResponse,
-  HealthStatus
-}
 import org.mockito.Mockito.when
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.mockito.MockitoSugar
+import simex.guardrail.definitions.HealthResponse
+import simex.guardrail.healthcheck.HealthcheckResource.HealthcheckResponse
+import simex.server.domain.healthcheck.entities.HealthStatus.OK
+import simex.server.domain.healthcheck.entities.{
+  HealthCheckStatus,
+  HealthCheckerResponse,
+  HealthStatus
+}
 
 class HealthcheckAPIHandlerTest extends AnyWordSpec with Matchers with MockitoSugar {
 
@@ -24,7 +25,7 @@ class HealthcheckAPIHandlerTest extends AnyWordSpec with Matchers with MockitoSu
       when(checker.checkHealth)
         .thenReturn(
           HealthCheckStatus(
-            HealthStatus.OK,
+            OK,
             NonEmptyList.of[HealthCheckerResponse](HealthCheckerResponse("self", HealthStatus.OK))
           )
         )

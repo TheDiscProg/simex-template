@@ -1,10 +1,10 @@
-package dapex.server.domain.healthcheck
+package simex.server.domain.healthcheck
 
 import cats.data.NonEmptyList
 import cats.syntax.all._
 import cats.{Monad, Parallel}
-import dapex.server.domain.healthcheck.entities.{HealthCheckStatus, HealthStatus}
 import org.typelevel.log4cats.Logger
+import simex.server.domain.healthcheck.entities.{HealthCheckStatus, HealthStatus}
 
 class HealthCheckService[F[_]: Monad: Parallel: Logger](checkers: NonEmptyList[HealthChecker[F]])
     extends HealthCheckAlgebra[F] {

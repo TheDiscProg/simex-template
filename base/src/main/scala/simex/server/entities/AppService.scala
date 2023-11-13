@@ -1,4 +1,4 @@
-package dapex.server.entities
+package simex.server.entities
 
 import org.http4s.server.Server
 
