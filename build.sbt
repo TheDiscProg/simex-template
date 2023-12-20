@@ -1,13 +1,13 @@
 ThisBuild / organization := "simex"
 
-ThisBuild / version := "1.3.0"
+ThisBuild / version := "1.4.0"
 
 lazy val commonSettings = Seq(
   scalaVersion := "2.13.10",
   libraryDependencies ++= Dependencies.all,
   resolvers += Resolver.githubPackages("TheDiscProg"),
   githubOwner := "TheDiscProg",
-  githubRepository := "simex-template", // This should be changed to repo
+  githubRepository := "simex-IOEffect-template", // This should be changed to repo
   addCompilerPlugin(
     ("org.typelevel" %% "kind-projector" % "0.13.2").cross(CrossVersion.full)
   ),
@@ -19,7 +19,7 @@ lazy val commonSettings = Seq(
 lazy val base = (project in file("base"))
   .settings(
     commonSettings,
-    name := "template-base",
+    name := "template-IOEffect-base",
     scalacOptions ++= Scalac.options,
     coverageExcludedPackages := Seq(
       "<empty>",
@@ -31,7 +31,7 @@ lazy val base = (project in file("base"))
 lazy val guardrail = (project in file("guardrail"))
   .settings(
     commonSettings,
-    name := "template-guardrail",
+    name := "template-IOEffect-guardrail",
     Compile / guardrailTasks := List(
       ScalaServer(
         file("swagger.yaml"),
@@ -60,7 +60,7 @@ lazy val root = (project in file("."))
   )
   .settings(
     commonSettings,
-    name := "simex-template",  // change to your repo
+    name := "simex-IOEffect-template",  // change to your repo
     Compile / doc / sources := Seq.empty,
     scalacOptions ++= Scalac.options,
     coverageExcludedPackages := Seq(

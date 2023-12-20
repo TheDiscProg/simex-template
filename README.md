@@ -1,4 +1,4 @@
-# Simex Messaging API Service Template
+# Simex Messaging API Service Template using IOEffect
 A template for creating new services. It:
 * Is written in Scala
 * Uses Guardrail to build the HTTP API
