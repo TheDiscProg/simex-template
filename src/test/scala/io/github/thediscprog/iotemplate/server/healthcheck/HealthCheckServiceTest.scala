@@ -1,23 +1,24 @@
-package simex.server.domain.healthcheck
+package io.github.thediscprog.iotemplate.server.healthcheck
 
 import cats.data.NonEmptyList
 import cats.effect.IO
-import org.scalatest.concurrent.ScalaFutures
-import org.scalatest.flatspec.AnyFlatSpec
-import org.scalatest.matchers.should.Matchers
-import org.scalatestplus.mockito.MockitoSugar
-import org.typelevel.log4cats.slf4j.Slf4jLogger
-import simex.server.domain.healthcheck.entities.{
+import io.github.thediscprog.iotemplate.server.healthcheck.entities.HealthStatus.{BROKEN, OK}
+import io.github.thediscprog.iotemplate.server.healthcheck.entities.{
   HealthCheckStatus,
   HealthCheckerResponse,
   HealthStatus
 }
-import simex.server.domain.healthcheck.entities.HealthStatus.{BROKEN, OK}
+import org.scalatest.concurrent.ScalaFutures
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatestplus.mockito.MockitoSugar
+import org.typelevel.log4cats.SelfAwareStructuredLogger
+import org.typelevel.log4cats.slf4j.Slf4jLogger
 
 class HealthCheckServiceTest extends AnyFlatSpec with Matchers with MockitoSugar with ScalaFutures {
 
   import cats.effect.unsafe.implicits.global
-  private implicit def unsafeLogger = Slf4jLogger.getLogger[IO]
+  private implicit def unsafeLogger: SelfAwareStructuredLogger[IO] = Slf4jLogger.getLogger[IO]
 
   val healthy = new HealthChecker[IO]() {
     override val name: String = "healthy"
@@ -42,7 +43,7 @@ class HealthCheckServiceTest extends AnyFlatSpec with Matchers with MockitoSugar
 
     val result = sut.checkHealth.unsafeToFuture()
 
-    whenReady(result) { status: HealthCheckStatus =>
+    whenReady(result) { status =>
       status.status shouldBe HealthStatus.OK
     }
   }
@@ -52,7 +53,7 @@ class HealthCheckServiceTest extends AnyFlatSpec with Matchers with MockitoSugar
 
     val result = sut.checkHealth.unsafeToFuture()
 
-    whenReady(result) { status: HealthCheckStatus =>
+    whenReady(result) { status =>
       status.status shouldBe HealthStatus.BROKEN
     }
   }

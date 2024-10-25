@@ -1,19 +1,19 @@
-package simex.server.domain.healthcheck
+package io.github.thediscprog.iotemplate.server.healthcheck
 
 import cats.Id
 import cats.data.NonEmptyList
-import org.mockito.Mockito.when
-import org.scalatest.matchers.should.Matchers
-import org.scalatest.wordspec.AnyWordSpec
-import org.scalatestplus.mockito.MockitoSugar
-import simex.guardrail.definitions.HealthResponse
-import simex.guardrail.healthcheck.HealthcheckResource.HealthcheckResponse
-import simex.server.domain.healthcheck.entities.HealthStatus.OK
-import simex.server.domain.healthcheck.entities.{
+import io.github.thediscprog.iotemplate.guardrail.definitions.HealthResponse
+import io.github.thediscprog.iotemplate.guardrail.healthcheck.HealthcheckResource.HealthcheckResponse
+import io.github.thediscprog.iotemplate.server.healthcheck.entities.HealthStatus.OK
+import io.github.thediscprog.iotemplate.server.healthcheck.entities.{
   HealthCheckStatus,
   HealthCheckerResponse,
   HealthStatus
 }
+import org.mockito.Mockito.when
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatestplus.mockito.MockitoSugar
 
 class HealthcheckAPIHandlerTest extends AnyWordSpec with Matchers with MockitoSugar {
 

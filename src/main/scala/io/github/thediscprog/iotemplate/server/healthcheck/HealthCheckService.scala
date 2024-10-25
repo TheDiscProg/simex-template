@@ -1,10 +1,13 @@
-package simex.server.domain.healthcheck
+package io.github.thediscprog.iotemplate.server.healthcheck
 
 import cats.data.NonEmptyList
 import cats.syntax.all._
 import cats.{Monad, Parallel}
+import io.github.thediscprog.iotemplate.server.healthcheck.entities.{
+  HealthCheckStatus,
+  HealthStatus
+}
 import org.typelevel.log4cats.Logger
-import simex.server.domain.healthcheck.entities.{HealthCheckStatus, HealthStatus}
 
 class HealthCheckService[F[_]: Monad: Parallel: Logger](checkers: NonEmptyList[HealthChecker[F]])
     extends HealthCheckAlgebra[F] {

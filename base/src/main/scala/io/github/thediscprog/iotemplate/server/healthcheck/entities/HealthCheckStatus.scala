@@ -1,4 +1,4 @@
-package simex.server.domain.healthcheck.entities
+package io.github.thediscprog.iotemplate.server.healthcheck.entities
 
 import cats.data.NonEmptyList
 

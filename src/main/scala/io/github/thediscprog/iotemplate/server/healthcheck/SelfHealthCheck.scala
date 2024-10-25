@@ -1,7 +1,10 @@
-package simex.server.domain.healthcheck
+package io.github.thediscprog.iotemplate.server.healthcheck
 
 import cats.Applicative
-import simex.server.domain.healthcheck.entities.{HealthCheckerResponse, HealthStatus}
+import io.github.thediscprog.iotemplate.server.healthcheck.entities.{
+  HealthCheckerResponse,
+  HealthStatus
+}
 
 class SelfHealthCheck[F[_]: Applicative] extends HealthChecker[F] {
 

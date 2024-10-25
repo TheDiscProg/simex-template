@@ -1,12 +1,12 @@
-package simex.server.domain.healthcheck
+package io.github.thediscprog.iotemplate.server.healthcheck
 
 import cats.Functor
 import cats.implicits._
-import simex.guardrail.definitions.HealthResponse
-import simex.guardrail.healthcheck.HealthcheckHandler
-import simex.guardrail.healthcheck.HealthcheckResource.HealthcheckResponse
-import simex.server.domain.healthcheck.entities.HealthCheckStatus
-import simex.server.domain.healthcheck.entities.HealthStatus.OK
+import io.github.thediscprog.iotemplate.server.healthcheck.entities.HealthCheckStatus
+import io.github.thediscprog.iotemplate.guardrail.definitions.HealthResponse
+import io.github.thediscprog.iotemplate.guardrail.healthcheck.HealthcheckHandler
+import io.github.thediscprog.iotemplate.guardrail.healthcheck.HealthcheckResource.HealthcheckResponse
+import io.github.thediscprog.iotemplate.server.healthcheck.entities.HealthStatus.OK
 
 class HealthcheckAPIHandler[F[_]: Functor](checker: HealthCheckAlgebra[F])
     extends HealthcheckHandler[F] {

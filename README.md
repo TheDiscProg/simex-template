@@ -1,8 +1,10 @@
-# Simex Messaging API Service Template using IOEffect
+# Simex Messaging API Service Template using Cat's IO
 A template for creating new services. It:
 * Is written in Scala
 * Uses Guardrail to build the HTTP API
 * Uses Ember embedded HTTP server
+
+Use this for when a HTTP listener is required using Cat's IO.
 
 ## What's included
 There is a simple health check API that returns a status.  
@@ -11,12 +13,8 @@ Please note that the health check API does not use SIMEX.
 
 ## Extending the service for specific service
 Use the ***base*** section for entities (basic data carriers) and interfaces or traits.  
-The package ***simex.entities*** is where any SIMEX request/response should live. As these are evolved 
-to a final solution, they can be moved into a separate repository.  
-The package name should follow the format ***simex.\<application\>.domain.\<service\>**  
-
-### Package Naming: Application
-This should refer to the name of the service or application, for example, ***authenticator***.
+The package ***io.github.thediscprog.iotemplate.server.entities*** is where any SIMEX request/response should live. As these are evolved 
+to a final solution, they can be moved into a separate repository.
 
 ### Package Naming: Service
 Within an application, there are different ***domains*** of concern. Here are some examples:
